@@ -22,11 +22,9 @@
 
 ### 📖 Quick Links
 
-[Documentation & FAQ](https://codingguru1968.gitbook.io/inventorystacks-wiki) – Full configuration guides.
-
-[Source Code](https://github.com/CodingGuru1968/InventoryStacks) – View the project on GitHub.
-
-[Discord Server](https://discord.gg/Rqmngywv57) - Found a bug or want a new feature?
+* [Documentation & FAQ](https://codingguru1968.gitbook.io/inventorystacks-wiki) – Full configuration guides.
+* [Source Code](https://github.com/CodingGuru1968/InventoryStacks) – View the project on GitHub.
+* [Discord Server](https://discord.gg/Rqmngywv57) - Found a bug or want a new feature?
 
 ### 💬 Getting Support
 
