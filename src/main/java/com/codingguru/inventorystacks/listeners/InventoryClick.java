@@ -114,6 +114,9 @@ public class InventoryClick implements Listener {
 		if (e.getSlotType() != SlotType.RESULT)
 			return;
 
+		if (blockStackedAnvilInputs(e))
+			return;
+
 		if (!ItemHandler.getInstance().hasEditedStackSize(XMaterialUtil.ENCHANTED_BOOK))
 			return;
 
@@ -144,20 +147,33 @@ public class InventoryClick implements Listener {
 		if (e.getSlotType() != SlotType.RESULT)
 			return;
 
+		if (blockStackedAnvilInputs(e))
+			return;
+	}
+
+	private boolean blockStackedAnvilInputs(InventoryClickEvent e) {
 		if (!InventoryStacks.getInstance().getConfig().getBoolean("disallow-stacked-anvil-items"))
-			return;
+			return false;
 
-		ItemStack craftedItem = e.getInventory().getContents()[0];
+		if (!hasDisallowedStackedInput(e.getInventory().getItem(0))
+				&& !hasDisallowedStackedInput(e.getInventory().getItem(1))) {
+			return false;
+		}
 
-		if (craftedItem.getAmount() <= 1)
-			return;
-
-		if (!ItemHandler.getInstance().hasEditedStackSize(craftedItem.getType()))
-			return;
-
-		e.getWhoClicked().closeInventory();
 		e.setCancelled(true);
+		e.getWhoClicked().closeInventory();
 		MessagesUtil.sendMessage(e.getWhoClicked(), MessagesUtil.DISALLOW_ANVIL_STACK.toString());
+		return true;
+	}
+
+	private boolean hasDisallowedStackedInput(ItemStack stack) {
+		if (stack == null || stack.getType() == Material.AIR)
+			return false;
+
+		if (stack.getAmount() <= 1)
+			return false;
+
+		return ItemHandler.getInstance().hasEditedStackSize(stack.getType());
 	}
 
 	@SuppressWarnings("deprecation")
